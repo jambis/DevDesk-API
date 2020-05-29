@@ -11,7 +11,7 @@ exports.up = function (knex) {
       tbl.string("title").notNullable();
       tbl.string("category").notNullable();
       tbl.text("tried");
-      tbl.text("additionalInfo");
+      tbl.text("additional_info");
       tbl.integer("created_by").references("id").inTable("users").notNullable();
       tbl.dateTime("created_on", { precision: 6 }).defaultTo(knex.fn.now());
       tbl.boolean("assigned").defaultTo(false).notNullable();

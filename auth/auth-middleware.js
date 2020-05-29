@@ -9,6 +9,7 @@ function restricted(req, res, next) {
   if (token) {
     jwt.verify(token, secret, (err, decodedToken) => {
       if (err) {
+        console.error(err);
         res.status(401).json({ message: "Invalid Credentials" });
       } else {
         req.decodedJwt = decodedToken;
