@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 
-exports.seed = function (knex) {
+exports.seed = async function (knex) {
   return knex("users").insert([
     {
       username: "Section Lead",
