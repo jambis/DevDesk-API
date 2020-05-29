@@ -12,10 +12,22 @@ exports.up = function (knex) {
       tbl.string("category").notNullable();
       tbl.text("tried");
       tbl.text("additional_info");
-      tbl.integer("created_by").references("id").inTable("users").notNullable();
+      tbl
+        .integer("created_by")
+        .references("id")
+        .inTable("users")
+        .notNullable()
+        .onDelete("cascade")
+        .onUpdate("cascade");
       tbl.dateTime("created_on", { precision: 6 }).defaultTo(knex.fn.now());
       tbl.boolean("assigned").defaultTo(false).notNullable();
-      tbl.integer("assigned_to").unsigned().references("id").inTable("users");
+      tbl
+        .integer("assigned_to")
+        .unsigned()
+        .references("id")
+        .inTable("users")
+        .onDelete("cascade")
+        .onUpdate("cascade");
       tbl.boolean("completed").defaultTo(false).notNullable();
     });
 };
