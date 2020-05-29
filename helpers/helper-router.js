@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const dbHelper = require("./helper-model");
-const { isCreator, isHelper, ticketExists } = require("./helper-middleware");
+const { isHelper, ticketExists } = require("./helper-middleware");
 
 router.get("/", isHelper, async (req, res) => {
   try {
@@ -30,12 +30,14 @@ router.get("/tickets", isHelper, async (req, res) => {
 router.put("/tickets/:id", ticketExists, isHelper, async (req, res) => {
   let changes = {};
 
-  if (req.body.assigned_to)
+  if (req.body.assigned_to) {
     changes = { ...changes, assigned_to: req.body.assigned_to };
+  }
 
-  if (req.body.assinged) {
+  if (req.body.assigned) {
     changes = { ...changes, assigned: req.body.assigned };
   }
+
   if (req.body.completed) {
     changes = { ...changes, completed: req.body.completed };
   }
@@ -50,7 +52,7 @@ router.put("/tickets/:id", ticketExists, isHelper, async (req, res) => {
     const tickets = await dbHelper.update(changes, req.params.id);
     const openTickets = await dbHelper.findAll();
 
-    ticekts
+    tickets
       ? res.status(202).json(openTickets)
       : res.status(404).json({ message: "Ticket with that ID was not found" });
   } catch (err) {
