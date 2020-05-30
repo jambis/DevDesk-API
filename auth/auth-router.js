@@ -39,12 +39,35 @@ const generateToken = require("./generate-token");
  */
 
 router.post("/register", async (req, res) => {
+  if (
+    !req.body.role ||
+    (req.body.role != "student" && req.body.role != "helper")
+  ) {
+    res
+      .status(400)
+      .json({ message: "User must have a role of student or helper" });
+  }
+
+  if (!req.body.username) {
+    res.status(400).json({ message: "Please include a username field" });
+  }
+
+  if (!req.body.password) {
+    res.status(400).json({ message: "Please include a password field" });
+  }
+
   let { username, password, role } = req.body;
 
   const hash = bcrypt.hashSync(password, 12);
   password = hash;
 
   try {
+    const userExists = await dbAuth.getBy({ username });
+
+    if (userExists) {
+      res.status(400).json({ message: "Username must be unique" });
+    }
+
     const user = await dbAuth.add({ username, password, role });
     const token = generateToken(user);
 
