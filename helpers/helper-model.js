@@ -11,7 +11,7 @@ async function findAll() {
 async function findHelpers(uid) {
   const helpers = await db("users")
     .whereIn("id", [1, 2, 3, uid])
-    .select("username");
+    .select("id", "username");
 
   return helpers;
 }

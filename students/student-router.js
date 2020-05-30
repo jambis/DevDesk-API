@@ -74,6 +74,13 @@ router.put(
     if (req.body.completed)
       changes = { ...changes, completed: req.body.completed };
 
+    if (Object.getOwnPropertyNames(changes).length == 0) {
+      res.status(400).json({
+        message:
+          "Please provide title, category, tried, additional_info or completed fields",
+      });
+    }
+
     try {
       const success = await dbStudent.update(changes, req.params.id);
       const studentTickets = await dbStudent.findAll({
