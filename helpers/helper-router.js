@@ -6,7 +6,7 @@ const { isHelper, ticketExists } = require("./helper-middleware");
 router.get("/", isHelper, async (req, res) => {
   try {
     const uid = req.decodedJwt.id;
-    console.log(uid);
+
     const helpers = await dbHelper.findHelpers(uid);
 
     res.status(200).json(helpers);

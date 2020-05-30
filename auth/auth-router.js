@@ -73,7 +73,7 @@ router.post("/register", async (req, res) => {
 
     res.status(201).json({ ...user, token });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ error: "Failed to register user" });
   }
 });
@@ -127,7 +127,7 @@ router.post("/login", async (req, res) => {
       res.status(401).json({ error: "Invalid credentials" });
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ error: "Failed to login" });
   }
 });

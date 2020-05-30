@@ -18,7 +18,7 @@ router.get("/tickets", isStudent, async (req, res) => {
 
 router.post("/tickets", isStudent, async (req, res) => {
   let ticketData = { created_by: req.decodedJwt.id };
-  console.log(req.decodedJwt);
+
   if (req.body.title) {
     ticketData = { ...ticketData, title: req.body.title };
   } else {
