@@ -12,27 +12,31 @@ const generateToken = require("./generate-token");
  *
  * @apiParam {string} username User's name, unique, required
  * @apiParam {string} password User's password, required
+ * @apiParam {string} role User's role, required
  *
  * @apiParamExample {json} Example Body
  * {
- *   "username": "Joker",
- *   "password": "happyface"
+ *   "username": "Milo",
+ *   "password": "pass"
  * }
  *
  * @apiExample {js} Example usage
- * axios.post("https://vacation-planner-be.herokuapp.com/api/auth/register", {
- *    username: "Joker"
- *    password: "happyface"
+ * axios.post("https://devdeskqueue-api.herokuapp.com/api/auth/register", {
+ *    username: "Milo"
+ *    password: "pass"
+ *    role: "student"
  * })
  *
- * @apiSuccess (201) {Number} id User's id
- * @apiSuccess (201) {String} username User's name
- * @apiSuccess (201) {String} token User's access token
+ * @apiSuccess (200) {Number} id User's id
+ * @apiSuccess (200) {String} username User's name
+ * @apiSuccess (200) {String} role User's role
+ * @apiSuccess (200) {String} token User's access token
  *
  * @apiSuccessExample {json} Successful Response
  * {
- *   "id": 8,
- *   "username": "Joker",
+ *   "id": 6,
+ *   "username": "Milo",
+ *   "role": "student",
  *   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbWJpczYiLCJpYXQiOjE1NzM5MjEyMjYsImV4cCI6MTU3NDAwNzYyNn0.lbAqXnl1s1aIK9TgMSFJNt2ej63lfqn_dsDdNpH1ZMs"
  * }
  *
@@ -88,24 +92,26 @@ router.post("/register", async (req, res) => {
  *
  * @apiParamExample {json} Example Body
  * {
- *   "username": "Joker",
- *   "password": "happyface"
+ *   "username": "Milo",
+ *   "password": "pass"
  * }
  *
  * @apiExample {js} Example usage
- * axios.post("https://vacation-planner-be.herokuapp.com/api/auth/login", {
- *    username: "Joker"
- *    password: "happyface"
+ * axios.post("https://devdeskqueue-api.herokuapp.com/api/auth/login", {
+ *    username: "Milo"
+ *    password: "pass"
  * })
  *
  * @apiSuccess (200) {Number} id User's id
  * @apiSuccess (200) {String} username User's name
+ * @apiSuccess (200) {String} role User's role
  * @apiSuccess (200) {String} token User's access token
  *
  * @apiSuccessExample {json} Successful Response
  * {
- *   "id": 8,
- *   "username": "Joker",
+ *   "id": 6,
+ *   "username": "Milo",
+ *   "role": "student",
  *   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbWJpczYiLCJpYXQiOjE1NzM5MjEyMjYsImV4cCI6MTU3NDAwNzYyNn0.lbAqXnl1s1aIK9TgMSFJNt2ej63lfqn_dsDdNpH1ZMs"
  * }
  *
