@@ -251,6 +251,25 @@ router.get("/tickets", isHelper, async (req, res) => {
 router.put("/tickets/:id", ticketExists, isHelper, async (req, res) => {
   let changes = {};
 
+  if (req.body.assigned === false && req.body.assigned_to === null) {
+    try {
+      const tickets = await dbHelper.update(
+        { assigned: false, assigned_to: null, completed: false },
+        req.params.id
+      );
+      const openTickets = await dbHelper.findAll();
+
+      tickets
+        ? res.status(202).json(openTickets)
+        : res
+            .status(404)
+            .json({ message: "Ticket with that ID was not found" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Failed to update ticket" });
+    }
+  }
+
   if (req.body.assigned_to) {
     changes = { ...changes, assigned_to: req.body.assigned_to };
   }
