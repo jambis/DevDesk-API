@@ -22,8 +22,8 @@ const generateToken = require("./generate-token");
  *
  * @apiExample {js} Example usage
  * axios.post("https://devdeskqueue-api.herokuapp.com/api/auth/register", {
- *    username: "Milo"
- *    password: "pass"
+ *    username: "Milo",
+ *    password: "pass",
  *    role: "student"
  * })
  *
@@ -98,7 +98,7 @@ router.post("/register", async (req, res) => {
  *
  * @apiExample {js} Example usage
  * axios.post("https://devdeskqueue-api.herokuapp.com/api/auth/login", {
- *    username: "Milo"
+ *    username: "Milo",
  *    password: "pass"
  * })
  *
